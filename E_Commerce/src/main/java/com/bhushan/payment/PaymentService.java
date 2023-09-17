@@ -79,10 +79,9 @@ public class PaymentService {
 					entity, CreateOrderResponse.class);
 //			ResponseEntity<Object> responseEntity = restTemplate.exchange(createOrderUrl, HttpMethod.POST,
 //					entity, Object.class);
-			
+
 			logger.info("CreateOrderResponse from Cashfree ==> {}", new Gson().toJson(responseEntity.getBody()));
 
-			
 			logger.info("CreateOrderResponse from Cashfree ==> {}", new Gson().toJson(responseEntity.getBody()));
 
 			CreateOrderResponse createOrderResponse = new CreateOrderResponse();
@@ -113,7 +112,7 @@ public class PaymentService {
 		headers.add("x-api-version", appVersion);
 		headers.add("Content-Type", MediaType.APPLICATION_JSON_VALUE);
 		headers.add("accept", MediaType.APPLICATION_JSON_VALUE);
-		//headers.setContentType(MediaType.APPLICATION_JSON);
+		// headers.setContentType(MediaType.APPLICATION_JSON);
 		return headers;
 	}
 
@@ -121,4 +120,14 @@ public class PaymentService {
 		BigDecimal bd = new BigDecimal(value).setScale(precision, RoundingMode.HALF_UP);
 		return bd.doubleValue();
 	}
+
+	public String paymentWebhookCF(PaymentWebhookCF request, HttpServletRequest httpRequest) throws Exception {
+
+		ApiCallHistory apiCallHistory = new ApiCallHistory(ApiMstEnum.PAYMENT_WEBHOOK_CF.getId(),
+				new Gson().toJson(request), null, "PaymentWebhookCF", null, CommonUtil.getIpAddress(httpRequest));
+		apiCallHistoryRepository.save(apiCallHistory);
+			// update payment status
+		return "Success";
+	}
+
 }

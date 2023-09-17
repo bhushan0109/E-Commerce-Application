@@ -49,6 +49,7 @@ import com.bhushan.repositories.CustomerRepo;
 import com.bhushan.services.AdminServices;
 import com.bhushan.services.CustomerServices;
 
+
 /**
  * @author bhushan patil
  *
@@ -211,17 +212,26 @@ public class AuthController {
 		}
 
 	}
-
-	@PostMapping("/create/order")
-	public ResponseEntity<?> createOrderCF(@RequestParam Double amount, @RequestBody List<OrderSplitCF> order_splits,
-			@RequestParam Long order_mode, HttpServletRequest httpRequest,@RequestParam Long merchant_id) throws Exception {
-
-		UserDTO userData = new  UserDTO();
-		userData.setId(1L);
-		CreateOrderResponse createOrderResponse = paymentService.createOrderApiCall(userData, amount, order_splits,
-				order_mode, httpRequest, merchant_id);
-		return new ResponseEntity<CreateOrderResponse>(createOrderResponse, HttpStatus.CREATED);
-
-	}
+//
+//	@PostMapping("/create/order")
+//	public ResponseEntity<?> createOrderCF(@RequestParam Double amount, @RequestBody List<OrderSplitCF> order_splits,
+//			@RequestParam Long order_mode, HttpServletRequest httpRequest,@RequestParam Long merchant_id) throws Exception {
+//
+//		UserDTO userData = new  UserDTO();
+//		userData.setId(1L);
+//		CreateOrderResponse createOrderResponse = paymentService.createOrderApiCall(userData, amount, order_splits,
+//				order_mode, httpRequest, merchant_id);
+//		return new ResponseEntity<CreateOrderResponse>(createOrderResponse, HttpStatus.CREATED);
+//
+//	}
+//	
+//	@PostMapping("/v1/paymentWebhookCF")
+//	public ResponseEntity<?> paymentWebhookCF(@RequestBody PaymentWebhookCF request, HttpServletRequest httpRequest) {
+//		try {
+//					paymentService.paymentWebhookCF(request, httpRequest));
+//		} catch (Exception e) {
+//		return new ResponseEntity<CreateOrderResponse>(createOrderResponse, HttpStatus.CREATED);
+//
+//	}
 
 }

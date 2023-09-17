@@ -10,7 +10,8 @@ public enum ApiMstEnum {
 //	PAYMENT_DECRYPT_RESPONSE,
 //	PAYMENT_INQUIRY;
 
-	CREATE_ORDER_CF(1), ORDER_PAY_CF(2);
+	CREATE_ORDER_CF(1), ORDER_PAY_CF(2),
+	PAYMENT_WEBHOOK_CF(10),;
 
 	@Getter
 	private Integer id;
