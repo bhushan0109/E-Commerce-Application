@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,12 +39,25 @@ public class PaymentControllerCf {
 	@PostMapping("/v1/paymentWebhookCF")
 	public ResponseEntity<?> paymentWebhookCF(@RequestBody PaymentWebhookCF request, HttpServletRequest httpRequest) {
 		try {
-			paymentService.paymentWebhookCF(request, httpRequest);
+			String paymentWebhookCF = paymentService.paymentWebhookCF(request, httpRequest);
+			return new ResponseEntity<Object>(paymentWebhookCF, HttpStatus.CREATED);
 		} catch (Exception e) {
-			return new ResponseEntity<Object>("", HttpStatus.CREATED);
-
+			e.printStackTrace();
+			return new ResponseEntity<Object>("fail", HttpStatus.CREATED);
 		}
-		return null;
 
 	}
+
+	@PostMapping("/v1/verify/payment")
+	public ResponseEntity<?> varifyPaymentCF(@RequestParam String order_id, HttpServletRequest httpRequest) {
+		try {
+			VarifyOrderResponse varifyOrderResponse = paymentService.varifyPaymentCF(order_id, httpRequest);
+			return new ResponseEntity<VarifyOrderResponse>(varifyOrderResponse, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<Object>("fail", HttpStatus.CREATED);
+
+		}
+
+	}
+
 }

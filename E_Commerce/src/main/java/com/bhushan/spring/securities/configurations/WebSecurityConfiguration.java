@@ -32,7 +32,7 @@ public class WebSecurityConfiguration {
 
 	public static final String[] PUBLIC_URLS = {
 
-			"/bestbuy/auth/customers/signup", "/bestbuy/auth/customers/signin", "/bestbuy/auth/admins/signin","/pg/v1/create/order","/pg/v1/paymentWebhookCF",
+			"/bestbuy/auth/customers/signup", "/bestbuy/auth/customers/signin", "/bestbuy/auth/admins/signin","/pg/v1/create/order","/pg/v1/paymentWebhookCF","/pg/v1/verify/payment/**",
 			"/bestbuy/categories/all", "/bestbuy/categories/all/**", "/bestbuy/categories/{categoryId}",
 			"/bestbuy/products/all", "/bestbuy/products/all/**", "/bestbuy/products/{productId}",
 			"/bestbuy/products/image/{imageName}", "/bestbuy/products/{productId}/images", "/bestbuy/reviews/**",

@@ -126,8 +126,30 @@ public class PaymentService {
 		ApiCallHistory apiCallHistory = new ApiCallHistory(ApiMstEnum.PAYMENT_WEBHOOK_CF.getId(),
 				new Gson().toJson(request), null, "PaymentWebhookCF", null, CommonUtil.getIpAddress(httpRequest));
 		apiCallHistoryRepository.save(apiCallHistory);
-			// update payment status
+		// update payment status
 		return "Success";
+	}
+
+	public VarifyOrderResponse varifyPaymentCF(String order_id, HttpServletRequest httpRequest) throws Exception {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			HttpHeaders headers = createHttpHeader();// merchant later stages
+			HttpEntity entity = new HttpEntity(headers);
+			ResponseEntity<VarifyOrderResponse> responseEntity = restTemplate.exchange(createOrderUrl + "/" + order_id,
+					HttpMethod.GET, entity, VarifyOrderResponse.class);
+
+			logger.info("CreateOrderResponse from Cashfree ==> {}", new Gson().toJson(responseEntity.getBody()));
+			VarifyOrderResponse varifyOrderResponse = new VarifyOrderResponse();
+			HttpStatus statusCode = responseEntity.getStatusCode();
+			if (statusCode == HttpStatus.OK || statusCode == HttpStatus.CREATED || statusCode == HttpStatus.ACCEPTED) {
+				varifyOrderResponse = responseEntity.getBody();
+			}
+			return varifyOrderResponse;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
