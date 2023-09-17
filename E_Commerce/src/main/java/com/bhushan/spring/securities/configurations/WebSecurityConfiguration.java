@@ -32,11 +32,20 @@ public class WebSecurityConfiguration {
 
 	public static final String[] PUBLIC_URLS = {
 
-			"/bestbuy/auth/customers/signup", "/bestbuy/auth/customers/signin", "/bestbuy/auth/admins/signin",
+			"/bestbuy/auth/customers/signup", "/bestbuy/auth/customers/signin", "/bestbuy/auth/admins/signin","/bestbuy/auth/create/order",
 			"/bestbuy/categories/all", "/bestbuy/categories/all/**", "/bestbuy/categories/{categoryId}",
 			"/bestbuy/products/all", "/bestbuy/products/all/**", "/bestbuy/products/{productId}",
 			"/bestbuy/products/image/{imageName}", "/bestbuy/products/{productId}/images", "/bestbuy/reviews/**",
-			"/v3/api-docs", "/v2/api-docs", "/swagger-resources/**", "/swagger-ui/**", "/webjars/**" };
+			"/v3/api-docs",
+			"/v2/api-docs", 
+			"/configuration/ui",
+			"/swagger-resources",
+			"/configuration/security",
+			"/swagger-ui.html",
+			"/webjars/**",
+			"/swagger-resources/configuration/ui",
+			"/swagger-ui.html", 
+			"/swagger-resources/configuration/security"};
 
 	public static final String[] USER_ADMIN_URLS = { "/bestbuy/auth/signout", "/bestbuy/address/**",
 			"/bestbuy/carts/**", "/bestbuy/customers/{contact}", "/bestbuy/customers/{contact}/image",

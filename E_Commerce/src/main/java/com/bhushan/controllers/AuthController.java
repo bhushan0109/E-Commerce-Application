@@ -4,6 +4,7 @@
 package com.bhushan.controllers;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bhushan.JWT.security.request.JwtAuthRequest;
@@ -39,6 +41,10 @@ import com.bhushan.modelResponseDto.AdminResponseDto;
 import com.bhushan.modelResponseDto.CustomerDetailsResponseDto;
 import com.bhushan.modelResponseDto.CustomerResponseDto;
 import com.bhushan.payloads.ApiResponse;
+import com.bhushan.payment.CreateOrderResponse;
+import com.bhushan.payment.OrderSplitCF;
+import com.bhushan.payment.PaymentService;
+import com.bhushan.payment.UserDTO;
 import com.bhushan.repositories.CustomerRepo;
 import com.bhushan.services.AdminServices;
 import com.bhushan.services.CustomerServices;
@@ -69,6 +75,9 @@ public class AuthController {
 
 	@Autowired
 	private CustomerRepo customerRepo;
+
+	@Autowired
+	private PaymentService paymentService;
 
 	// For Customer & Admin Username is Contact Number
 	@PostMapping("/customers/signin")
@@ -192,7 +201,7 @@ public class AuthController {
 						adminRequestDto.getEmail()), HttpStatus.BAD_REQUEST);
 
 			} else {
-				
+
 				AdminResponseDto adminResponseDto = this.adminServices.registerAdmin(adminRequestDto);
 
 				return new ResponseEntity<AdminResponseDto>(adminResponseDto, HttpStatus.CREATED);
@@ -200,6 +209,18 @@ public class AuthController {
 			}
 
 		}
+
+	}
+
+	@PostMapping("/create/order")
+	public ResponseEntity<?> createOrderCF(@RequestParam Double amount, @RequestBody List<OrderSplitCF> order_splits,
+			@RequestParam Long order_mode, HttpServletRequest httpRequest,@RequestParam Long merchant_id) throws Exception {
+
+		UserDTO userData = new  UserDTO();
+		userData.setId(1L);
+		CreateOrderResponse createOrderResponse = paymentService.createOrderApiCall(userData, amount, order_splits,
+				order_mode, httpRequest, merchant_id);
+		return new ResponseEntity<CreateOrderResponse>(createOrderResponse, HttpStatus.CREATED);
 
 	}
 
