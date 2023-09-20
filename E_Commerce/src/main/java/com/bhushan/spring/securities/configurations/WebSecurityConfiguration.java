@@ -45,7 +45,8 @@ public class WebSecurityConfiguration {
 			"/webjars/**",
 			"/swagger-resources/configuration/ui",
 			"/swagger-ui.html", 
-			"/swagger-resources/configuration/security"};
+			"/swagger-resources/configuration/security",
+			"/bestbuy/address/customers/**"};
 
 	public static final String[] USER_ADMIN_URLS = { "/bestbuy/auth/signout", "/bestbuy/address/**",
 			"/bestbuy/carts/**", "/bestbuy/customers/{contact}", "/bestbuy/customers/{contact}/image",

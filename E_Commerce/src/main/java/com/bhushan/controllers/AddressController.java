@@ -21,6 +21,7 @@ import com.bhushan.exceptions.ResourceNotAllowedException;
 import com.bhushan.exceptions.ResourceNotFoundException;
 import com.bhushan.modelRequestDto.AddressRequestDto;
 import com.bhushan.modelRequestDto.AddressUpdateRequestDto;
+import com.bhushan.modelRequestDto.LoginForm;
 import com.bhushan.modelResponseDto.AddressResponseDto;
 import com.bhushan.modelResponseDto.CustomerResponseDto;
 import com.bhushan.services.AddressServices;
@@ -35,6 +36,12 @@ public class AddressController {
 
 	@Autowired
 	private AddressServices addressServices;
+	
+	  @PostMapping("/customers/v1/")
+	    public String processLogin(@Valid @RequestBody LoginForm form) {
+	        return "Success";
+
+	    }
 
 	@GetMapping("/customers/{contact}")
 	public ResponseEntity<AddressResponseDto> getAddressDetailsHandler(@PathVariable("contact") String customerContact)

@@ -15,7 +15,7 @@
 	<name>E_Commerce</name>
 	<description>REST API For E Commerce Application</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<swagger2.version>3.0.0</swagger2.version>
 		<swagger.ui.version>2.9.2</swagger.ui.version>
 	</properties>
